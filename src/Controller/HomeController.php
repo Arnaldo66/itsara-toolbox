@@ -17,9 +17,9 @@ class HomeController extends Controller
         $form = $this->createForm(UploadFormType::class, null);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form;
             dump($_FILES);
-            dump(file_get_contents($_FILES['upload_form']['tmp_name']['export']));die();
+            $file = fopen($_FILES['upload_form']['tmp_name']['export'], "r");
+            dump(fgetcsv($file));die();
         }
 
         return $this->render('home/index.html.twig', [
