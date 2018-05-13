@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UploadFormType;
 use App\Entity\Command;
+use \Dompdf\Dompdf;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,7 @@ class HomeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $file = fopen($_FILES['upload_form']['tmp_name']['export'], "r");
             $this->insertCSVInDB($file);
+            return $this->redirectToRoute('listing');
         }
 
         return $this->render('home/index.html.twig', [
@@ -27,8 +29,42 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/listing", name="listing")
+     */
+    public function listing(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $commands = $em->getRepository('App\Entity\Command')->findAll();
+
+        return $this->render('home/listing.html.twig', [
+            'controller_name' => 'HomeController', 'commands' => $commands
+        ]);
+    }
+
+    /**
+     * @Route("/print", name="print")
+     */
+    public function print(Request $request)
+    {
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('En cours de developpement');
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+    }
+
+
+
     private function insertCSVInDB($file)
     {
+        $this->truncateCommand();
         $row = 1;
         while (($data = fgetcsv($file, 1000, ",")) !== FALSE) {
             if($row > 1){
@@ -36,12 +72,22 @@ class HomeController extends Controller
             }
             $row++;
         }
-        dump('ok');
-        die();
+
+    }
+
+    private function truncateCommand()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $platform   = $connection->getDatabasePlatform();
+
+        $connection->executeUpdate($platform->getTruncateTableSQL('command', true));
     }
 
     private function createCommand(array $data)
     {
+
+
         $command = new Command;
         $command->setNumber($data[0]);
         $command->setDateCommand($data[2]);
