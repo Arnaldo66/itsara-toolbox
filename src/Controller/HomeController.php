@@ -47,14 +47,13 @@ class HomeController extends Controller
      */
     public function print(Request $request)
     {
-
-        die('jdjdj');
         $dompdf = new Dompdf();
         $dompdf->loadHtml('En cours de developpement');
 
         // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'landscape');
 
+        die('jdjdj');
         // Render the HTML as PDF
         $dompdf->render();
 
