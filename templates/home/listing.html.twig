@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Choix des commandes{% endblock %}
 
 {% block body %}
     <div class="container">
-        <form action="{{ path('print')}}" method="POST">
+        <div id="information-block" class="jumbotron">
             <h1>Choisir les commandes à imprimer</h1>
+            <p>Décochez les commandes que vous ne voulez pas envoyer à l'impression.</p>
+        </div>
+        <form action="{{ path('print')}}" method="POST">
             <div class="row">
-                <table>
+                <table class="table">
                     <tr>
                         <th>Numéro</th>
                         <th>Date</th>

@@ -38,7 +38,7 @@ class HomeController extends Controller
         $commands = $em->getRepository('App\Entity\Command')->findAll();
 
         return $this->render('home/listing.html.twig', [
-            'controller_name' => 'HomeController', 'commands' => $commands
+            'commands' => $commands
         ]);
     }
 
@@ -47,20 +47,9 @@ class HomeController extends Controller
      */
     public function print(Request $request)
     {
-        die('ii');
-    }
-
-    /**
-     * @Route("/test", name="test")
-     */
-    public function test(Request $request)
-    {
-        return $this->render('home/test.html.twig', [
-            'controller_name' => 'HomeController'
+        return $this->render('home/print.html.twig', [
         ]);
     }
-
-
 
     private function insertCSVInDB($file)
     {
