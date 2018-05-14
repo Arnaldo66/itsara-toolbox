@@ -55,10 +55,6 @@ class HomeController extends Controller
 
         // Render the HTML as PDF
         $dompdf->render();
-
-        die('i');
-        // Output the generated PDF to Browser
-        $dompdf->stream();
     }
 
 
