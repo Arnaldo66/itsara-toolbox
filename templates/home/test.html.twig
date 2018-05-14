@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+    <div class="container">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+
+    <script>
+        $( document ).ready(function() {
+            var doc = new jsPDF()
+            doc.text(10, 10, 'This is a test')
+            doc.autoPrint()
+            doc.save('autoprint.pdf')
+        });
+    </script>
+{% endblock %}
