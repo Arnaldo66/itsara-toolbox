@@ -47,14 +47,17 @@ class HomeController extends Controller
      */
     public function print(Request $request)
     {
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml('En cours de developpement');
+        die('ii');
+    }
 
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
-
-        // Render the HTML as PDF
-        $dompdf->render();
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test(Request $request)
+    {
+        return $this->render('home/test.html.twig', [
+            'controller_name' => 'HomeController'
+        ]);
     }
 
 
