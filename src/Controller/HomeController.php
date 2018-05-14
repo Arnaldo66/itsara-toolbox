@@ -47,6 +47,8 @@ class HomeController extends Controller
      */
     public function print(Request $request)
     {
+
+        die('jdjdj');
         $dompdf = new Dompdf();
         $dompdf->loadHtml('En cours de developpement');
 
