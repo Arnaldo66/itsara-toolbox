@@ -25,7 +25,7 @@ class HomeController extends Controller
         }
 
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController', 'form' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 

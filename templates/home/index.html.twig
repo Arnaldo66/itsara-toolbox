@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Import CSV{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Importer le fichier des commandes</h1>
-        <div class="row">
-            {{ form_start(form) }}
-                <div class="form-group">
-                    {{ form_label(form.export) }}
-                    {{ form_widget(form.export) }}
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Importer</button>
-                </div>
-            {{ form_end(form) }}
+        <div id="information-block" class="jumbotron">
+            <h1>Upload du fichier au format CSV</h1>
+            <div class="col-md-4 form-box">
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_widget(form.export,{attr:{'class': 'form-control-file'}}) }}
+                    </div>
+
+                    <div class="form-group submit-box">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
         </div>
-    </div>
 {% endblock %}

@@ -13,8 +13,12 @@
 
     <script>
         $( document ).ready(function() {
-            var doc = new jsPDF()
-            doc.text(10, 10, 'This is a test')
+            var doc = new jsPDF('p', 'mm', 'a5')
+            doc.text(20, 20, 'Test imprission facture 1!');
+            doc.text(20, 30, 'Bla bla bla bla');
+            doc.addPage();
+            doc.text(20, 20, 'Test imprission facture 2')
+            doc.text(20, 30, 'amamamamamamamamamamam');
             doc.autoPrint()
             doc.save('autoprint.pdf')
         });

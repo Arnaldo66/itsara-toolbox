@@ -1,0 +1,21 @@
+div#site-header{
+    border-color:#080808;
+    top: 0;
+    height:100px;
+    background-color:#222;color: #FFF;
+    text-align:center;
+    padding-top:15px;
+    font-size:40px;
+}
+
+div#information-block{
+    margin-top:20px;
+}
+
+div#information-block div.form-box{
+    margin-top:25px;
+}
+
+div#information-block div.form-box div.submit-box{
+    text-align: right;
+}
