@@ -53,7 +53,6 @@ class HomeController extends Controller
         // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'landscape');
 
-        die('jdjdj');
         // Render the HTML as PDF
         $dompdf->render();
 
