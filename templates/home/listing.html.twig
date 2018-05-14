@@ -7,6 +7,7 @@
         <div id="information-block" class="jumbotron">
             <h1>Choisir les commandes à imprimer</h1>
             <p>Décochez les commandes que vous ne voulez pas envoyer à l'impression.</p>
+            <p>Nombre de commandes: {{ commands|length }}</p>
         </div>
         <form action="{{ path('print')}}" method="POST">
             <div class="row">
