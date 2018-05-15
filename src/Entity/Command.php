@@ -131,6 +131,11 @@ class Command
      */
     private $print;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isDiscount;
+
     public function getId()
     {
         return $this->id;
@@ -408,6 +413,18 @@ class Command
     public function setPrint(bool $print): self
     {
         $this->print = $print;
+
+        return $this;
+    }
+
+    public function getIsDiscount(): ?bool
+    {
+        return $this->isDiscount;
+    }
+
+    public function setIsDiscount(?bool $isDiscount): self
+    {
+        $this->isDiscount = $isDiscount;
 
         return $this;
     }

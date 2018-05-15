@@ -19,32 +19,18 @@ class CommandRepository extends ServiceEntityRepository
         parent::__construct($registry, Command::class);
     }
 
-//    /**
-//     * @return Command[] Returns an array of Command objects
-//     */
-    /*
-    public function findByExampleField($value)
+
+    public function getUniqueCommandNumber()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('distinct c.number, c.name, c.firstName, c.street, c.streetComplement, c.postalCode, c.province, c.city, c.country, c.phone, c.email, c.typePayment, c.dateCommand, c.shippingCoastHT, c.shippingCoastTTC')
+            ->andWhere('c.print = :print')
+            ->setParameter('print', true)
+            ->andWhere('c.isDiscount = :discount')
+            ->setParameter('discount', false)
+            ->orderBy('c.number', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Command
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -13,25 +13,25 @@
             <div class="row">
                 <table class="table">
                     <tr>
+                        <th>Imprimer</th>
                         <th>Numéro</th>
                         <th>Date</th>
                         <th>Article</th>
                         <th>Prix TTC</th>
                         <th>Nom</th>
                         <th>Prenom</th>
-                        <th>Imprimer</th>
                     </tr>
                         {% for command in commands %}
                             <tr>
+                                <td class="text-center">
+                                    <input type="checkbox" name="chk_{{ command.id }}" id="chk_{{ command.id }}" checked="checked" autocomplete="off"/>
+                                </td>
                                 <td>{{ command.number }}</td>
                                 <td>{{ command.dateCommand }}</td>
                                 <td>{{ command.article }}</td>
                                 <td>{{ command.priceTTC }}</td>
                                 <td>{{ command.name }}</td>
                                 <td>{{ command.firstName }}</td>
-                                <td>
-                                    <input type="checkbox" name="chk_{{ command.id }}" id="chk_{{ command.id }}" checked="checked" autocomplete="off"/>
-                                </td>
                             </tr>
                         {% endfor %}
                     </tr>
