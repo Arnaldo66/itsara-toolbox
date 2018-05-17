@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container">
+        <div id="js-vars" data-vars="{{ commands|e('html_attr') }}"/>
     </div>
 {% endblock %}
 
@@ -12,13 +13,22 @@
     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 
     <script>
+        var commands = jQuery('#js-vars').data('vars');
+
         $( document ).ready(function() {
             var doc = new jsPDF('p', 'mm', 'a5')
-            doc.text(20, 20, 'Test imprission facture 1!');
-            doc.text(20, 30, 'Bla bla bla bla');
-            doc.addPage();
-            doc.text(20, 20, 'Test imprission facture 2')
-            doc.text(20, 30, 'amamamamamamamamamamam');
+
+            $(commands).each(function(k,v){
+                doc.text(20, 20, v.number);
+                doc.addPage();
+            });
+
+
+            //doc.text(20, 20, 'Test imprission facture 1!');
+            //doc.text(20, 30, 'Bla bla bla bla');
+            //doc.addPage();
+            //doc.text(20, 20, 'Test imprission facture 2')
+            //doc.text(20, 30, 'amamamamamamamamamamam');
             doc.autoPrint()
             doc.save('autoprint.pdf')
         });

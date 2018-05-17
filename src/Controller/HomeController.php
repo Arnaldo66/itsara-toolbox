@@ -75,7 +75,7 @@ class HomeController extends Controller
         }
 
         foreach ($allCommands as $command) {
-            if(!$command->isDiscount()){
+            if(!$command->getIsDiscount()){
                 $command->setPrint(false);
             }
             if(in_array($command->getId(), $arrayIds)){
@@ -91,9 +91,7 @@ class HomeController extends Controller
         $commands = $em->getRepository('App\Entity\Command')->getUniqueCommandNumber();
 
         $arrayCommand = [];
-        $arrayCommand['commands'] = [];
         foreach ($commands as $value) {
-            dump($value);
             $arrayDetail = [];
             $arrayDetail['number'] = $value['number'];
             $arrayDetail['name'] = $value['name'];
@@ -158,7 +156,7 @@ class HomeController extends Controller
 
             $arrayDetail['total'] = $arrayDetail['sousTotal'] + floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) + ($totalRemise);
 
-            $arrayCommand['commands'][] = $arrayDetail;
+            $arrayCommand[] = $arrayDetail;
 
         }
 
