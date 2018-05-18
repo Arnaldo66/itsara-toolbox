@@ -19,11 +19,63 @@
         $( document ).ready(function() {
             var doc = new jsPDF('p', 'mm', 'a4')
 
+            var count = commands.length;
             $(commands).each(function(k,v){
                 header();
+                createBody(v);
                 footer();
                 doc.addPage();
+
+                /*header();
+                createBody(v);
+                footer();
+
+                if(k < count - 1){
+                    doc.addPage();
+                }*/
             });
+
+            function createBody(v){
+                factureNumber(v);
+                factureAdress(v);
+                factureTable(v);
+            }
+
+            function factureTable(v){
+                factureHeader();
+            }
+
+            function factureHeader(){
+                doc.setDrawColor(232,232,232);
+                //line(xl, yl, xr, yr);
+                doc.line(26, 150, 195, 150);
+            }
+
+            function factureAdress(v){
+                //todo check if province or street complement is empty
+                doc.setFontSize(10);
+                doc.text(26,100, "Adresse de facturation et de livraison");
+                doc.setFontType('normal');
+                doc.text(26,105, v.name + ' ' + v.firstName);
+                doc.text(26,110, v.street);
+                doc.text(26,115, v.streetComplement);
+                doc.text(26,120, v.postalCode + ' ' + v.city);
+                doc.text(26,125, v.country);
+                doc.text(26,130, v.phone);
+                doc.text(26,135, v.email);
+            }
+
+            function factureNumber(v){
+                //todo format date
+                doc.setDrawColor(0);
+                doc.setFillColor(232,232,232);
+                doc.rect(20,80,30,10, 'F');
+                doc.setFontSize(12);
+                doc.setFontType('bold');
+                doc.text(24.5,86.5, 'FACTURE');
+                var factureName = v.number + ' de ' + v.name + ', ' + v.firstName + ' le ' + v.dateCommand;
+                doc.text(51,86.5, factureName);
+            }
 
             function header(){
                 doc.setFontSize(25);
@@ -41,11 +93,6 @@
                 doc.text(70, 285, "TVA intracommunautaire FR02443273248");
             }
 
-            //doc.text(20, 20, 'Test imprission facture 1!');
-            //doc.text(20, 30, 'Bla bla bla bla');
-            //doc.addPage();
-            //doc.text(20, 20, 'Test imprission facture 2')
-            //doc.text(20, 30, 'amamamamamamamamamamam');
             doc.autoPrint()
             doc.save('autoprint.pdf')
         });
