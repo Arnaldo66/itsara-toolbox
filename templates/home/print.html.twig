@@ -21,6 +21,7 @@
 
             $(commands).each(function(k,v){
                 header();
+                footer();
                 doc.addPage();
             });
 
@@ -34,12 +35,10 @@
             }
 
             function footer(){
-                doc.setFontSize(12);
-                doc.text(50, 35, 'ISTARA.net');
-                doc.setFontSize(16);
-                doc.text(20, 48, "Bijoux en argent massif ethniques du triangle d’or");
-                doc.text(20, 55, "et créations des Karen du village de Huay Tom.");
-                doc.addImage(imgData, 'JPEG',150,15,46,50);
+                doc.setFontSize(10);
+                doc.text(70, 275, "ISTARA, BP 25, 83340 Le Thoronet, France");
+                doc.text(45, 280, "RCS Draguignan 443 273 248 000 98 Garantie des douanes de Nice 12275");
+                doc.text(70, 285, "TVA intracommunautaire FR02443273248");
             }
 
             //doc.text(20, 20, 'Test imprission facture 1!');
