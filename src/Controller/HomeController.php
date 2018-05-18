@@ -151,10 +151,10 @@ class HomeController extends Controller
             $arrayDetail['totalTVAHorsPort'] = round(($sousTotal * 20) / 100, 2);
             $arrayDetail['fraisPortHT'] = $value['shippingCoastHT'];
             $arrayDetail['fraisPortTTC'] = $value['shippingCoastTTC'];
-            $arrayDetail['totalTVA'] = $arrayDetail['totalTVAHorsPort'] + floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) - floatval(str_replace(',', '.', $arrayDetail['fraisPortHT']));
+            $arrayDetail['totalTVA'] = round($arrayDetail['totalTVAHorsPort'] + floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) - floatval(str_replace(',', '.', $arrayDetail['fraisPortHT'])),2);
             $arrayDetail['totalRemise'] = $totalRemise;
 
-            $arrayDetail['total'] = $arrayDetail['sousTotal'] + floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) + ($totalRemise);
+            $arrayDetail['total'] = round($arrayDetail['sousTotal'] + floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) + ($totalRemise),2);
 
             $arrayCommand[] = $arrayDetail;
 

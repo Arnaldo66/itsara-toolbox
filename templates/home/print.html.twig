@@ -26,13 +26,13 @@
                 footer();
                 doc.addPage();
 
-                /*header();
+                header();
                 createBody(v);
                 footer();
 
                 if(k < count - 1){
                     doc.addPage();
-                }*/
+                }
             });
 
             function createBody(v){
@@ -41,14 +41,72 @@
                 factureTable(v);
             }
 
+
             function factureTable(v){
-                factureHeader();
+                factureTableHeader();
+                var beginArticle = 162;
+                doc.setLineWidth(0.4);
+                doc.setFontType('normal');
+                $(v.articles).each(function(n,article){
+                    factureArticleLine(article, beginArticle);
+                    doc.line(26, beginArticle+2, 195, beginArticle+2);
+                    beginArticle += 6;
+                });
+                doc.text(27,beginArticle, 'Sous Total');
+                doc.text(167,beginArticle, String(v.sousTotal));
+                doc.line(26, beginArticle+2, 195, beginArticle+2);
+                beginArticle += 6;
+
+                $(v.discounts).each(function(n,discount){
+                    factureArticleDiscount(discount,beginArticle);
+                    doc.line(26, beginArticle+2, 195, beginArticle+2);
+                    beginArticle += 6;
+                });
+
+                doc.text(27,beginArticle, 'Pourcentage de TVA 20%: ' + String(v.totalTVAHorsPort));
+                doc.line(26, beginArticle+2, 195, beginArticle+2);
+                beginArticle += 6;
+                doc.text(27,beginArticle, 'Frais de port:');
+                doc.text(125,beginArticle, 'net: ' + String(v.fraisPortHT));
+                doc.text(153,beginArticle, '20%');
+                doc.text(167,beginArticle, v.fraisPortTTC);
+                doc.setLineWidth(0.8);
+                doc.line(26, beginArticle+2, 195, beginArticle+2);
+                beginArticle += 6;
+
+                doc.text(27,beginArticle, 'Total(Pourcentage de TVA: '+ v.totalTVA +')');
+                doc.text(167,beginArticle, String(v.total));
+
+                beginArticle += 8;
+                doc.setFontType('bold');
+                doc.text(27,beginArticle, 'Mode de paiement: ' + v.typePayment);
             }
 
-            function factureHeader(){
+            function factureArticleDiscount(discount,beginArticle){
+                doc.text(27,beginArticle, discount.discountCode);
+                doc.text(167,beginArticle, discount.discountAmount);
+            }
+
+            function factureArticleLine(article, beginArticle){
+                doc.text(27,beginArticle, article.article);
+                doc.text(110,beginArticle, article.nbArticle);
+                doc.text(125,beginArticle, article.prixUnitaire);
+                doc.text(153,beginArticle, String(article.TVA));
+                doc.text(167,beginArticle, article.priceTTC);
+            }
+
+            function factureTableHeader(){
                 doc.setDrawColor(232,232,232);
                 //line(xl, yl, xr, yr);
                 doc.line(26, 150, 195, 150);
+                doc.setFontType('bold');
+                doc.text(27,155, 'Produit');
+                doc.text(110,155, 'Quantité');
+                doc.text(125,155, "Prix unitaire");
+                doc.text(153,155, "TVA");
+                doc.text(167,155, "Total");
+                doc.setLineWidth(1);
+                doc.line(26, 157, 195, 157);
             }
 
             function factureAdress(v){
@@ -87,6 +145,7 @@
             }
 
             function footer(){
+                doc.setFontType('normal');
                 doc.setFontSize(10);
                 doc.text(70, 275, "ISTARA, BP 25, 83340 Le Thoronet, France");
                 doc.text(45, 280, "RCS Draguignan 443 273 248 000 98 Garantie des douanes de Nice 12275");
