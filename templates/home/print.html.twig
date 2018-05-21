@@ -30,6 +30,7 @@
     <script>
 
         var commands = jQuery('#js-vars').data('vars');
+        var left_x_header = 7;
 
         $( document ).ready(function() {
             var doc = new jsPDF('p', 'mm', 'a4')
@@ -59,51 +60,51 @@
 
             function factureTable(v){
                 factureTableHeader();
-                var beginArticle = 162;
+                var beginArticle = 117;
                 doc.setLineWidth(0.4);
                 doc.setFontType('normal');
                 $(v.articles).each(function(n,article){
                     factureArticleLine(article, beginArticle);
-                    doc.line(26, beginArticle+2, 195, beginArticle+2);
+                    doc.line(16, beginArticle+2, 195, beginArticle+2);
                     beginArticle += 6;
                 });
-                doc.text(27,beginArticle, 'Sous Total');
+                doc.text(18,beginArticle, 'Sous Total');
                 doc.text(167,beginArticle, String(v.sousTotal));
-                doc.line(26, beginArticle+2, 195, beginArticle+2);
+                doc.line(16, beginArticle+2, 195, beginArticle+2);
                 beginArticle += 6;
 
                 $(v.discounts).each(function(n,discount){
                     factureArticleDiscount(discount,beginArticle);
-                    doc.line(26, beginArticle+2, 195, beginArticle+2);
+                    doc.line(16, beginArticle+2, 195, beginArticle+2);
                     beginArticle += 6;
                 });
 
-                doc.text(27,beginArticle, 'Pourcentage de TVA 20%: ' + String(v.totalTVAHorsPort));
-                doc.line(26, beginArticle+2, 195, beginArticle+2);
+                doc.text(18,beginArticle, 'Pourcentage de TVA 20%: ' + String(v.totalTVAHorsPort));
+                doc.line(16, beginArticle+2, 195, beginArticle+2);
                 beginArticle += 6;
-                doc.text(27,beginArticle, 'Frais de port:');
+                doc.text(18,beginArticle, 'Frais de port:');
                 doc.text(125,beginArticle, 'net: ' + String(v.fraisPortHT));
                 doc.text(153,beginArticle, '20%');
                 doc.text(167,beginArticle, v.fraisPortTTC);
                 doc.setLineWidth(0.8);
-                doc.line(26, beginArticle+2, 195, beginArticle+2);
+                doc.line(16, beginArticle+2, 195, beginArticle+2);
                 beginArticle += 6;
 
-                doc.text(27,beginArticle, 'Total(Pourcentage de TVA: '+ v.totalTVA +')');
+                doc.text(18,beginArticle, 'Total(Pourcentage de TVA: '+ v.totalTVA +')');
                 doc.text(167,beginArticle, String(v.total));
 
                 beginArticle += 8;
                 doc.setFontType('bold');
-                doc.text(27,beginArticle, 'Mode de paiement: ' + v.typePayment);
+                doc.text(18,beginArticle, 'Mode de paiement: ' + v.typePayment);
             }
 
             function factureArticleDiscount(discount,beginArticle){
-                doc.text(27,beginArticle, discount.discountCode);
+                doc.text(18,beginArticle, discount.discountCode);
                 doc.text(167,beginArticle, discount.discountAmount);
             }
 
             function factureArticleLine(article, beginArticle){
-                doc.text(27,beginArticle, article.article);
+                doc.text(18,beginArticle, article.article);
                 doc.text(110,beginArticle, article.nbArticle);
                 doc.text(125,beginArticle, article.prixUnitaire);
                 doc.text(153,beginArticle, String(article.TVA));
@@ -113,50 +114,49 @@
             function factureTableHeader(){
                 doc.setDrawColor(232,232,232);
                 //line(xl, yl, xr, yr);
-                doc.line(26, 150, 195, 150);
+                doc.line(16, 105, 195, 105);
                 doc.setFontType('bold');
-                doc.text(27,155, 'Produit');
-                doc.text(110,155, 'Quantité');
-                doc.text(125,155, "Prix unitaire");
-                doc.text(153,155, "TVA");
-                doc.text(167,155, "Total");
+                doc.text(27,110, 'Produit');
+                doc.text(110,110, 'Quantité');
+                doc.text(125,110, "Prix unitaire");
+                doc.text(153,110, "TVA");
+                doc.text(167,110, "Total");
                 doc.setLineWidth(1);
-                doc.line(26, 157, 195, 157);
+                doc.line(16, 113, 195, 113);
             }
 
             function factureAdress(v){
-                //todo check if province or street complement is empty
                 doc.setFontSize(10);
-                doc.text(26,100, "Adresse de facturation et de livraison");
+                doc.text(16,55, "Adresse de facturation et de livraison");
                 doc.setFontType('normal');
-                doc.text(26,105, v.name + ' ' + v.firstName);
-                doc.text(26,110, v.street);
-                doc.text(26,115, v.streetComplement);
-                doc.text(26,120, v.postalCode + ' ' + v.city);
-                doc.text(26,125, v.country);
-                doc.text(26,130, v.phone);
-                doc.text(26,135, v.email);
+                doc.text(16,60, v.name + ' ' + v.firstName);
+                doc.text(16,65, v.street);
+                doc.text(16,70, v.postalCode + ' ' + v.city);
+                doc.text(16,75, v.country);
+                doc.text(16,80, v.phone);
+                doc.text(16,85, v.email);
             }
 
             function factureNumber(v){
                 //todo format date
                 doc.setDrawColor(0);
                 doc.setFillColor(232,232,232);
-                doc.rect(20,80,30,10, 'F');
-                doc.setFontSize(12);
+                doc.rect(left_x_header,40,30,9, 'FD');
+                doc.setFontSize(11);
                 doc.setFontType('bold');
-                doc.text(24.5,86.5, 'FACTURE');
+                doc.text(left_x_header + 5,46, 'FACTURE');
                 var factureName = v.number + ' de ' + v.name + ', ' + v.firstName + ' le ' + v.dateCommand;
-                doc.text(51,86.5, factureName);
+                doc.text(38,46, factureName);
             }
 
             function header(){
-                doc.setFontSize(25);
-                doc.text(50, 35, 'ITSARA.net');
-                doc.setFontSize(16);
-                doc.text(20, 48, "Bijoux en argent massif ethniques du triangle d’or");
-                doc.text(20, 55, "et créations des Karen du village de Huay Tom.");
-                doc.addImage(imgData, 'JPEG',150,15,46,50);
+                doc.setFontSize(13);
+                doc.text(left_x_header, 12, 'BOUTIQUE ITSARA');
+                doc.text(55, 12, 'www.itsara.net');
+                doc.setFontSize(11);
+                doc.text(left_x_header, 20, "Bijoux en argent massif ethniques du triangle d’or");
+                doc.text(left_x_header, 25, "et créations des Karen du village de Huay Tom.");
+                doc.addImage(imgData, 'JPEG',168,7,32,34);
             }
 
             function footer(){

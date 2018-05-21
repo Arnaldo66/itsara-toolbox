@@ -99,7 +99,6 @@ class HomeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $commands = $em->getRepository('App\Entity\Command')->getUniqueCommandNumber();
-
         $arrayCommand = [];
         foreach ($commands as $value) {
             $arrayDetail = [];
@@ -114,6 +113,19 @@ class HomeController extends Controller
             $arrayDetail['country'] = $value['country'];
             $arrayDetail['phone'] = $value['phone'];
             $arrayDetail['email'] = $value['email'];
+
+            $arrayDetail['firstNameShipping'] = $value['firstNameShipping'];
+            $arrayDetail['streetShipping'] = $value['streetShipping'];
+            $arrayDetail['postalCodeShipping'] = $value['postalCodeShipping'];
+            $arrayDetail['provinceShipping'] = $value['provinceShipping'];
+            $arrayDetail['cityShipping'] = $value['cityShipping'];
+            $arrayDetail['countryShipping'] = $value['countryShipping'];
+            $arrayDetail['phoneShipping'] = $value['phoneShipping'];
+            $arrayDetail['emailShipping'] = $value['emailShipping'];
+
+            $arrayDetail['infoBill'] = $value['infoBill'];
+            $arrayDetail['infoDelivery'] = $value['infoDelivery'];
+
             $arrayDetail['dateCommand'] = $value['dateCommand'];
             $arrayDetail['typePayment'] = $value['typePayment'];
             $arrayDetail['discounts'] = [];
@@ -146,6 +158,7 @@ class HomeController extends Controller
             foreach ($articles as $article) {
                 $arrayArticle = [];
                 $arrayArticle['article'] = $article->getArticle();
+                $arrayArticle['declinaison'] = $article->getDeclinaison();
                 $arrayArticle['nbArticle'] = $article->getNbArticle();
                 $arrayArticle['prixUnitaire'] = $article->getUnitPriceTTC();
                 $arrayArticle['TVA'] = 20;
