@@ -54,6 +54,16 @@ class HomeController extends Controller
     }
 
     /**
+     * @Route("/print-vignette", name="print_vignette")
+     */
+    public function printVignette(Request $request)
+    {
+        return $this->render('home/print_vignette.html.twig', [
+            'commands' => json_encode([])
+        ]);
+    }
+
+    /**
      * @Route("/render-pdf", name="render_pdf")
      */
     public function renderPdf(Request $request)

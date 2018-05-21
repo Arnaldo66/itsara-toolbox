@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Impression{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div id="js-vars" data-vars="{{ commands|e('html_attr') }}"/>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('jspdf.js') }}"></script>
+    <script>
+
+        var commands = jQuery('#js-vars').data('vars');
+
+        $( document ).ready(function() {
+            var doc = new jsPDF('l', 'mm', 'perso');
+            doc.text(10,10, 'Salut');
+            doc.addPage();
+            doc.text(10,10, 'Salut');
+
+            doc.autoPrint();
+            doc.save('autoprint.pdf');
+        });
+    </script>
+{% endblock %}
