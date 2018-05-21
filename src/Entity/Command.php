@@ -136,6 +136,66 @@ class Command
      */
     private $isDiscount;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $declinaison;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $infoBill;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $infoDelivery;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nameShipping;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $firstNameShipping;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $streetShipping;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $postalCodeShipping;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $cityShipping;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $provinceShipping;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $countryShipping;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phoneShipping;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $emailShipping;
+
     public function getId()
     {
         return $this->id;
@@ -425,6 +485,150 @@ class Command
     public function setIsDiscount(?bool $isDiscount): self
     {
         $this->isDiscount = $isDiscount;
+
+        return $this;
+    }
+
+    public function getDeclinaison(): ?string
+    {
+        return $this->declinaison;
+    }
+
+    public function setDeclinaison(?string $declinaison): self
+    {
+        $this->declinaison = $declinaison;
+
+        return $this;
+    }
+
+    public function getInfoBill(): ?string
+    {
+        return $this->infoBill;
+    }
+
+    public function setInfoBill(?string $infoBill): self
+    {
+        $this->infoBill = $infoBill;
+
+        return $this;
+    }
+
+    public function getInfoDelivery(): ?string
+    {
+        return $this->infoDelivery;
+    }
+
+    public function setInfoDelivery(?string $infoDelivery): self
+    {
+        $this->infoDelivery = $infoDelivery;
+
+        return $this;
+    }
+
+    public function getNameShipping(): ?string
+    {
+        return $this->nameShipping;
+    }
+
+    public function setNameShipping(?string $nameShipping): self
+    {
+        $this->nameShipping = $nameShipping;
+
+        return $this;
+    }
+
+    public function getFirstNameShipping(): ?string
+    {
+        return $this->firstNameShipping;
+    }
+
+    public function setFirstNameShipping(?string $firstNameShipping): self
+    {
+        $this->firstNameShipping = $firstNameShipping;
+
+        return $this;
+    }
+
+    public function getStreetShipping(): ?string
+    {
+        return $this->streetShipping;
+    }
+
+    public function setStreetShipping(?string $streetShipping): self
+    {
+        $this->streetShipping = $streetShipping;
+
+        return $this;
+    }
+
+    public function getPostalCodeShipping(): ?string
+    {
+        return $this->postalCodeShipping;
+    }
+
+    public function setPostalCodeShipping(?string $postalCodeShipping): self
+    {
+        $this->postalCodeShipping = $postalCodeShipping;
+
+        return $this;
+    }
+
+    public function getCityShipping(): ?string
+    {
+        return $this->cityShipping;
+    }
+
+    public function setCityShipping(?string $cityShipping): self
+    {
+        $this->cityShipping = $cityShipping;
+
+        return $this;
+    }
+
+    public function getProvinceShipping(): ?string
+    {
+        return $this->provinceShipping;
+    }
+
+    public function setProvinceShipping(?string $provinceShipping): self
+    {
+        $this->provinceShipping = $provinceShipping;
+
+        return $this;
+    }
+
+    public function getCountryShipping(): ?string
+    {
+        return $this->countryShipping;
+    }
+
+    public function setCountryShipping(?string $countryShipping): self
+    {
+        $this->countryShipping = $countryShipping;
+
+        return $this;
+    }
+
+    public function getPhoneShipping(): ?string
+    {
+        return $this->phoneShipping;
+    }
+
+    public function setPhoneShipping(?string $phoneShipping): self
+    {
+        $this->phoneShipping = $phoneShipping;
+
+        return $this;
+    }
+
+    public function getEmailShipping(): ?string
+    {
+        return $this->emailShipping;
+    }
+
+    public function setEmailShipping(?string $emailShipping): self
+    {
+        $this->emailShipping = $emailShipping;
 
         return $this;
     }

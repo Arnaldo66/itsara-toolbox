@@ -197,13 +197,12 @@ class HomeController extends Controller
 
     private function createCommand(array $data)
     {
-
-
         $command = new Command;
         $command->setNumber($data[0]);
         $command->setDateCommand($data[2]);
         $command->setTypePayment($data[3]);
         $command->setArticle($data[4]);
+        $command->setDeclinaison($data[5]);
         $command->setUnitPriceTTC($data[6]);
         $command->setUnitPriceHT($data[7]);
         $command->setShippingCoastHT($data[8]);
@@ -222,7 +221,20 @@ class HomeController extends Controller
         $command->setCountry($data[27]);
         $command->setPhone($data[28]);
         $command->setEmail($data[29]);
-        $command->setPrint($data[29]);
+
+        $command->setNameShipping($data[36]);
+        $command->setFirstNameShipping($data[38]);
+        $command->setStreetShipping($data[40]);
+        $command->setPostalCodeShipping($data[41]);
+        $command->setCityShipping($data[42]);
+        $command->setProvinceShipping($data[43]);
+        $command->setCountryShipping($data[44]);
+        $command->setPhoneShipping($data[45]);
+        $command->setEmailShipping($data[46]);
+
+        $command->setInfoBill($data[30]);
+        $command->setInfoDelivery($data[47]);
+        $command->setPrint(true);
         $command->setIsDiscount(false);
 
         if(strpos($data[4], 'Code de réduction') !== false){
