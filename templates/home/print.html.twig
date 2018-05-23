@@ -65,6 +65,10 @@
                 doc.setFontType('normal');
                 $(v.articles).each(function(n,article){
                     factureArticleLine(article, beginArticle);
+                    if(article.declinaison.length){
+                        beginArticle += 5
+                        doc.text(18,beginArticle, article.declinaison);
+                    }
                     doc.line(16, beginArticle+2, 195, beginArticle+2);
                     beginArticle += 6;
                 });
@@ -154,7 +158,7 @@
                 doc.text(left_x_header, 12, 'BOUTIQUE ITSARA');
                 doc.text(55, 12, 'www.itsara.net');
                 doc.setFontSize(11);
-                doc.text(left_x_header, 20, "Bijoux en argent massif ethniques du triangle d’or");
+                doc.text(left_x_header, 20, "Bijoux en argent massif ethniques du trinagle d'or");
                 doc.text(left_x_header, 25, "et créations des Karen du village de Huay Tom.");
                 doc.addImage(imgData, 'JPEG',168,7,32,34);
             }
