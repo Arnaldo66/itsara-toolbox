@@ -23,7 +23,8 @@ class PDFService
         foreach ($commands as $value) {
             $arrayDetail = [];
             if(strlen($value['postalCodeShipping'])){
-                $arrayDetail['name'] = $value['firstNameShipping'];
+                $arrayDetail['name'] = $value['nameShipping'];
+                $arrayDetail['firstName'] = $value['firstNameShipping'];
                 $arrayDetail['streetComplement'] = $value['streetComplementShipping'];
                 $arrayDetail['street'] = $value['streetShipping'];
                 $arrayDetail['postalCode'] = $value['postalCodeShipping'];
