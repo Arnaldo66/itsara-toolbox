@@ -81,9 +81,7 @@ class PDFService
                 $arrayArticle['TVA'] = '20%';
                 $arrayArticle['priceTTC'] = $article->getPriceTTC();
 
-
                 $sousTotal = $sousTotal + $this->stringToFloat($arrayArticle['priceTTC']);
-
                 $arrayDetail['articles'][] = $arrayArticle;
             }
             $totalTVAHorsPort = $this->tvaCalculate($sousTotal, $totalRemise);
