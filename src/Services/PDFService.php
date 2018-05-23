@@ -12,6 +12,40 @@ class PDFService
         $this->em = $em;
     }
 
+
+    /**
+     * get command Adresse
+     */
+     public function getCommandVignette()
+     {
+        $commands = $this->em->getRepository('App\Entity\Command')->getUniqueCommandNumber();
+        $arrayAdresse = [];
+        foreach ($commands as $value) {
+            $arrayDetail = [];
+            if(strlen($value['postalCodeShipping'])){
+                $arrayDetail['name'] = $value['firstNameShipping'];
+                $arrayDetail['streetComplement'] = $value['streetComplementShipping'];
+                $arrayDetail['street'] = $value['streetShipping'];
+                $arrayDetail['postalCode'] = $value['postalCodeShipping'];
+                $arrayDetail['province'] = $value['provinceShipping'];
+                $arrayDetail['city'] = $value['cityShipping'];
+                $arrayDetail['country'] = $value['countryShipping'];
+            }else{
+                $arrayDetail['name'] = $value['name'];
+                $arrayDetail['firstName'] = $value['firstName'];
+                $arrayDetail['street'] = $value['street'];
+                $arrayDetail['streetComplement'] = $value['streetComplement'];
+                $arrayDetail['postalCode'] = $value['postalCode'];
+                $arrayDetail['province'] = $value['province'];
+                $arrayDetail['city'] = $value['city'];
+                $arrayDetail['country'] = $value['country'];
+            }
+
+            $arrayAdresse[] = $arrayDetail;
+        }
+        return json_encode($arrayAdresse);
+     }
+
     /**
      * Create a json with pdf detail
      */
@@ -33,7 +67,7 @@ class PDFService
             $arrayDetail['phone'] = $value['phone'];
             $arrayDetail['email'] = $value['email'];
             $arrayDetail['firstNameShipping'] = $value['firstNameShipping'];
-            $arrayDetail['streetComplementShipping'] = $value['streetShipping'];
+            $arrayDetail['streetComplementShipping'] = $value['streetComplementShipping'];
             $arrayDetail['streetShipping'] = $value['streetShipping'];
             $arrayDetail['postalCodeShipping'] = $value['postalCodeShipping'];
             $arrayDetail['provinceShipping'] = $value['provinceShipping'];

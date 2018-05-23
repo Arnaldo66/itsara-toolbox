@@ -14,15 +14,63 @@
     <script>
 
         var commands = jQuery('#js-vars').data('vars');
+        var count = commands.length;
 
         $( document ).ready(function() {
+            function capitalize(s){
+                return s.toLowerCase().replace( /\b./g, function(a){ return a.toUpperCase(); } );
+            };
+
             var doc = new jsPDF('l', 'mm', 'perso');
-            doc.text(10,10, 'Salut');
-            doc.addPage();
-            doc.text(10,10, 'Salut');
+            doc.setFontSize(8);
+
+            $(commands).each(function(k,v){
+                var beginText = 5;
+                var interval = 5;
+                doc.text(5,beginText, capitalize(v.name + ' ' + v.firstName));
+                beginText += interval;
+                doc.text(5,beginText, v.street.toLowerCase());
+                beginText += interval;
+                if(v.streetComplement.length){
+                    doc.text(5,beginText, v.streetComplement.toLowerCase());
+                    beginText += interval;
+                }
+
+                doc.text(5,beginText, v.postalCode + ' ' + capitalize(v.city));
+                beginText += interval;
+                if(v.province.length){
+                    doc.text(5,beginText, capitalize(v.province));
+                    beginText += interval;
+                }
+
+                if(v.country.toLowerCase() != 'france'){
+                    doc.text(5,beginText, capitalize(v.country));
+                }
+
+                if(k < count - 1){
+                    doc.addPage();
+                }
+            });
+
 
             doc.autoPrint();
             doc.save('autoprint.pdf');
         });
+
+        /*city: "MONT DE MARSAN"
+        ​​
+        country: "France"
+        ​​
+        firstName: "DANIELLE"
+        ​​
+        name: "SALVIN"
+        ​​
+        postalCode: "40000"
+        ​​
+        province: ""
+        ​​
+        street: "4 iMPASSE DES DROITS DE L HOMME"
+        ​​
+        streetComplement: ""*/
     </script>
 {% endblock %}
