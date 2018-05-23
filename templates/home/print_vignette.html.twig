@@ -4,6 +4,12 @@
 
 {% block body %}
     <div class="container">
+        <div id="information-block" class="jumbotron">
+            <h1>Impression des vignettes</h1>
+            <p>
+                Les vignettes pour la poste s'impriment directement sur cette page.
+            </p>
+        </div>
         <div id="js-vars" data-vars="{{ commands|e('html_attr') }}"/>
     </div>
 {% endblock %}
@@ -27,24 +33,26 @@
             $(commands).each(function(k,v){
                 var beginText = 5;
                 var interval = 5;
-                doc.text(5,beginText, capitalize(v.name + ' ' + v.firstName));
+                var left_x = 3;
+
+                doc.text(left_x,beginText, capitalize(v.name + ' ' + v.firstName));
                 beginText += interval;
-                doc.text(5,beginText, v.street.toLowerCase());
+                doc.text(left_x,beginText, v.street.toLowerCase());
                 beginText += interval;
                 if(v.streetComplement.length){
-                    doc.text(5,beginText, v.streetComplement.toLowerCase());
+                    doc.text(left_x,beginText, v.streetComplement.toLowerCase());
                     beginText += interval;
                 }
 
-                doc.text(5,beginText, v.postalCode + ' ' + capitalize(v.city));
+                doc.text(left_x,beginText, v.postalCode + ' ' + capitalize(v.city));
                 beginText += interval;
                 if(v.province.length){
-                    doc.text(5,beginText, capitalize(v.province));
+                    doc.text(left_x,beginText, capitalize(v.province));
                     beginText += interval;
                 }
 
                 if(v.country.toLowerCase() != 'france'){
-                    doc.text(5,beginText, capitalize(v.country));
+                    doc.text(left_x,beginText, capitalize(v.country));
                 }
 
                 if(k < count - 1){
@@ -56,21 +64,5 @@
             doc.autoPrint();
             doc.save('autoprint.pdf');
         });
-
-        /*city: "MONT DE MARSAN"
-        ​​
-        country: "France"
-        ​​
-        firstName: "DANIELLE"
-        ​​
-        name: "SALVIN"
-        ​​
-        postalCode: "40000"
-        ​​
-        province: ""
-        ​​
-        street: "4 iMPASSE DES DROITS DE L HOMME"
-        ​​
-        streetComplement: ""*/
     </script>
 {% endblock %}
