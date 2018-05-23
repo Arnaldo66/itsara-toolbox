@@ -161,20 +161,22 @@ class HomeController extends Controller
                 $arrayArticle['declinaison'] = $article->getDeclinaison();
                 $arrayArticle['nbArticle'] = $article->getNbArticle();
                 $arrayArticle['prixUnitaire'] = $article->getUnitPriceTTC();
-                $arrayArticle['TVA'] = 20;
+                $arrayArticle['TVA'] = '20%';
                 $arrayArticle['priceTTC'] = $article->getPriceTTC();
+
 
                 $sousTotal = $sousTotal + floatval(str_replace(',', '.', $arrayArticle['priceTTC']));
 
                 $arrayDetail['articles'][] = $arrayArticle;
             }
-
+            $calculHorsTaxe = $sousTotal - ($totalRemise * -1);
+            $totalTVAHorsPort = $calculHorsTaxe - ($calculHorsTaxe / 1.2);
 
             $arrayDetail['sousTotal'] = $sousTotal;
-            $arrayDetail['totalTVAHorsPort'] = round(($sousTotal * 20) / 100, 2);
+            $arrayDetail['totalTVAHorsPort'] = round($totalTVAHorsPort);
             $arrayDetail['fraisPortHT'] = $value['shippingCoastHT'];
             $arrayDetail['fraisPortTTC'] = $value['shippingCoastTTC'];
-            $arrayDetail['totalTVA'] = round($arrayDetail['totalTVAHorsPort'] + floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) - floatval(str_replace(',', '.', $arrayDetail['fraisPortHT'])),2);
+            $arrayDetail['totalTVA'] = round($totalTVAHorsPort + (floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) - floatval(str_replace(',', '.', $arrayDetail['fraisPortHT']))),2);
             $arrayDetail['totalRemise'] = $totalRemise;
 
             $arrayDetail['total'] = round($arrayDetail['sousTotal'] + floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) + ($totalRemise),2);
@@ -216,14 +218,14 @@ class HomeController extends Controller
         $command->setTypePayment($data[3]);
         $command->setArticle($data[4]);
         $command->setDeclinaison($data[5]);
-        $command->setUnitPriceTTC($data[6]);
-        $command->setUnitPriceHT($data[7]);
+        $command->setUnitPriceHT($data[6]);
+        $command->setUnitPriceTTC($data[7]);
         $command->setShippingCoastHT($data[8]);
         $command->setShippingCoastTTC($data[9]);
         $command->setTVA($data[11]);
         $command->setNbArticle($data[12]);
-        $command->setPriceTTC($data[13]);
-        $command->setPriceHT($data[14]);
+        $command->setPriceHT($data[13]);
+        $command->setPriceTTC($data[14]);
         $command->setName($data[19]);
         $command->setFirstName($data[21]);
         $command->setStreetComplement($data[22]);
