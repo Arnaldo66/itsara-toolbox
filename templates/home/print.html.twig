@@ -38,12 +38,12 @@
             var count = commands.length;
             $(commands).each(function(k,v){
                 header();
-                createBody(v);
+                createBody(v, true);
                 footer();
                 doc.addPage();
 
                 header();
-                createBody(v);
+                createBody(v, false);
                 footer();
 
                 if(k < count - 1){
@@ -51,12 +51,28 @@
                 }
             });
 
-            function createBody(v){
+            function createBody(v, client){
                 factureNumber(v);
                 factureAdress(v);
+                if(!client){
+                    createInformation(v);
+                }
                 factureTable(v);
             }
 
+            function createInformation(v){
+                var beginInfo = 95;
+                var remarqueDelivery = v.infoDelivery;
+                var remarqueBill = v.infoBill;
+                if(remarqueDelivery.length){
+                    doc.text(18,beginInfo, remarqueDelivery);
+                    beginInfo += 5;
+                }
+                if(remarqueBill.length){
+                    doc.text(18,beginInfo, remarqueBill);
+                }
+
+            }
 
             function factureTable(v){
                 factureTableHeader();
