@@ -169,11 +169,11 @@ class HomeController extends Controller
 
                 $arrayDetail['articles'][] = $arrayArticle;
             }
-            $calculHorsTaxe = $sousTotal - ($totalRemise * -1);
+            $calculHorsTaxe = $sousTotal - abs($totalRemise);
             $totalTVAHorsPort = $calculHorsTaxe - ($calculHorsTaxe / 1.2);
 
             $arrayDetail['sousTotal'] = $sousTotal;
-            $arrayDetail['totalTVAHorsPort'] = round($totalTVAHorsPort);
+            $arrayDetail['totalTVAHorsPort'] = round($totalTVAHorsPort,2);
             $arrayDetail['fraisPortHT'] = $value['shippingCoastHT'];
             $arrayDetail['fraisPortTTC'] = $value['shippingCoastTTC'];
             $arrayDetail['totalTVA'] = round($totalTVAHorsPort + (floatval(str_replace(',', '.', $arrayDetail['fraisPortTTC'])) - floatval(str_replace(',', '.', $arrayDetail['fraisPortHT']))),2);
