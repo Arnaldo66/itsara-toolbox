@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UploadFormType;
 use App\Services\CommandService;
+use App\Services\PDFService;
 use \Dompdf\Dompdf;
 
 class HomeController extends Controller
@@ -66,9 +67,9 @@ class HomeController extends Controller
     /**
      * @Route("/render-pdf", name="render_pdf")
      */
-    public function renderPdf(Request $request, CommandService $commandeService)
+    public function renderPdf(Request $request, PDFService $pdfService)
     {
-        $commands = $commandeService->createJsonForPDF();
+        $commands = $pdfService->createJsonForPDF();
         return $this->render('home/print.html.twig', [
             'commands' => $commands
         ]);
