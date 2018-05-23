@@ -196,6 +196,11 @@ class Command
      */
     private $emailShipping;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $streetComplementShipping;
+
     public function getId()
     {
         return $this->id;
@@ -629,6 +634,18 @@ class Command
     public function setEmailShipping(?string $emailShipping): self
     {
         $this->emailShipping = $emailShipping;
+
+        return $this;
+    }
+
+    public function getStreetComplementShipping(): ?string
+    {
+        return $this->streetComplementShipping;
+    }
+
+    public function setStreetComplementShipping(?string $streetComplementShipping): self
+    {
+        $this->streetComplementShipping = $streetComplementShipping;
 
         return $this;
     }
