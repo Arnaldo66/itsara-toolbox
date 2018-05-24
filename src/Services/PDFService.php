@@ -67,6 +67,7 @@ class PDFService
             $arrayDetail['country'] = $value['country'];
             $arrayDetail['phone'] = $value['phone'];
             $arrayDetail['email'] = $value['email'];
+            $arrayDetail['nameShipping'] = $value['nameShipping'];
             $arrayDetail['firstNameShipping'] = $value['firstNameShipping'];
             $arrayDetail['streetComplementShipping'] = $value['streetComplementShipping'];
             $arrayDetail['streetShipping'] = $value['streetShipping'];

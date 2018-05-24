@@ -147,7 +147,20 @@
 
             function factureAdress(v){
                 doc.setFontSize(10);
-                doc.text(16,55, "Adresse de facturation et de livraison");
+                if(v.postalCodeShipping.length){
+                    doc.text(16,55, "Adresse de facturation");
+                    doc.text(110,55, "Adresse de livraison");
+                    doc.setFontType('normal');
+                    doc.text(110,60, v.nameShipping + ' ' + v.firstNameShipping);
+                    doc.text(110,65, v.streetShipping);
+                    doc.text(110,70, v.postalCodeShipping + ' ' + v.cityShipping);
+                    doc.text(110,75, v.countryShipping);
+                    doc.text(110,80, v.phoneShipping);
+                    doc.text(110,85, v.emailShipping);
+                }else{
+                    doc.text(16,55, "Adresse de facturation et de livraison");
+                }
+
                 doc.setFontType('normal');
                 doc.text(16,60, v.name + ' ' + v.firstName);
                 doc.text(16,65, v.street);
