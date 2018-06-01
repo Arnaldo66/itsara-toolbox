@@ -23,19 +23,16 @@
         var count = commands.length;
 
         $( document ).ready(function() {
-            function capitalize(s){
-                return s.toLowerCase().replace( /\b./g, function(a){ return a.toUpperCase(); } );
-            };
 
             var doc = new jsPDF('l', 'mm', 'perso');
-            doc.setFontSize(8);
+            doc.setFontSize(10);
 
             $(commands).each(function(k,v){
                 var beginText = 5;
-                var interval = 5;
-                var left_x = 3;
+                var interval = 4;
+                var left_x = 1;
 
-                doc.text(left_x,beginText, capitalize(v.name + ' ' + v.firstName));
+                doc.text(left_x,beginText, v.name + ' ' + v.firstName);
                 beginText += interval;
                 doc.text(left_x,beginText, v.street.toLowerCase());
                 beginText += interval;
@@ -44,15 +41,15 @@
                     beginText += interval;
                 }
 
-                doc.text(left_x,beginText, v.postalCode + ' ' + capitalize(v.city));
+                doc.text(left_x,beginText, v.postalCode + ' ' + v.city);
                 beginText += interval;
                 if(v.province.length){
-                    doc.text(left_x,beginText, capitalize(v.province));
+                    doc.text(left_x,beginText, v.province);
                     beginText += interval;
                 }
 
                 if(v.country.toLowerCase() != 'france'){
-                    doc.text(left_x,beginText, capitalize(v.country));
+                    doc.text(left_x,beginText, v.country);
                 }
 
                 if(k < count - 1){
